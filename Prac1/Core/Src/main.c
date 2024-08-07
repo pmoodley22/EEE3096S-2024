@@ -142,6 +142,7 @@ int main(void)
     else if (HAL_GPIO_ReadPin(Button3_GPIO_Port, Button3_Pin) == 0)
     {
     	Index = 0;
+    	__HAL_TIM_SET_AUTORELOAD(&htim16, delay-1);
     }
     
 
