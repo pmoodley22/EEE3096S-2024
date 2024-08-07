@@ -119,7 +119,30 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
     // TODO: Check pushbuttons to change timer delay
+    if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+    {
+    	delay = 500;
+    }
+
+    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)== GPIO_PIN_SET)
+    {
+    	delay =2000;
+    }
     
+    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2)== GPIO_PIN_SET)
+        {
+        	delay =2000;
+        }
+
+    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3)== GPIO_PIN_SET)
+        {
+        	delay =1000;
+        }
+
+    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3) == GPIO_PIN_SET)
+    {
+    	Index = 0;
+    }
     
 
   }
