@@ -105,10 +105,7 @@ int main(void)
 
   // TODO: Start timer TIM16
 
-  if (HAL_TIM_Base_Start_IT(&htim16) != HAL_OK)
-  {
-	  Error_Handler();
-  }
+  HAL_TIM_Base_Start_IT(&htim16);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -119,27 +116,30 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
     // TODO: Check pushbuttons to change timer delay
-    if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+    if (HAL_GPIO_ReadPin(Button0_GPIO_Port, Button0_Pin) == 0)
     {
     	delay = 500;
+    	__HAL_TIM_SET_AUTORELOAD(&htim16, delay-1);
+
+
     }
 
-    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)== GPIO_PIN_SET)
+    else if (HAL_GPIO_ReadPin(Button1_GPIO_Port, Button1_Pin)== 0)
     {
     	delay =2000;
+    	__HAL_TIM_SET_AUTORELOAD(&htim16, delay-1);
+
     }
     
-    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2)== GPIO_PIN_SET)
-        {
-        	delay =2000;
-        }
-
-    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3)== GPIO_PIN_SET)
+    else if (HAL_GPIO_ReadPin(Button2_GPIO_Port, Button2_Pin)== 0)
         {
         	delay =1000;
+        	__HAL_TIM_SET_AUTORELOAD(&htim16, delay-1);
+
         }
 
-    else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3) == GPIO_PIN_SET)
+
+    else if (HAL_GPIO_ReadPin(Button3_GPIO_Port, Button3_Pin) == 0)
     {
     	Index = 0;
     }
@@ -368,12 +368,21 @@ void TIM16_IRQHandler(void)
 
 	for (int i=0; i<8;i++)
 	{
-		HAL_GPIO_WritePin(GPIOB, (1<<i),patt[Index][i] ? GPIO_PIN_SET : GPIO_PIN_RESET);
+		if (patt[Index][i])
+		{
+			HAL_GPIO_WritePin(GPIOB, (1<<i), GPIO_PIN_SET);
+		}
+		else
+		{
+			HAL_GPIO_WritePin(GPIOB, (1<<i), GPIO_PIN_RESET);
+		}
+
+
 	}
 
 	Index = (Index+1)%9;
 
-	__HAL_TIM_SET_AUTORELOAD(&htim16, delay-1);
+	//__HAL_TIM_SET_AUTORELOAD(&htim16, delay-1);
 
   
 }
