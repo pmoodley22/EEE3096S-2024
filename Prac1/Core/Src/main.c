@@ -366,6 +366,15 @@ void TIM16_IRQHandler(void)
 	// TODO: Change LED pattern
 	// print something
 
+	for (int i=0; i<8;i++)
+	{
+		HAL_GPIO_WritePin(GPIOB, (1<<i),patt[Index][i] ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	}
+
+	Index = (Index+1)%9;
+
+	__HAL_TIM_SET_AUTORELOAD(&htim16, delay-1);
+
   
 }
 
