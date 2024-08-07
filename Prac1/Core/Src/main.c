@@ -45,6 +45,19 @@ TIM_HandleTypeDef htim16;
 /* USER CODE BEGIN PV */
 // TODO: Define input variables
 
+int Index = 0;
+uint32_t delay = 1000; //Setting a delay for now
+const uint8_t patt[9][8] ={
+		{1, 1, 1, 0, 1, 0, 0, 1},
+		{1, 1, 0, 1, 0, 0, 1, 0},
+		{1, 0, 1, 0, 0, 1, 0, 0},
+		{0, 1, 0, 0, 1, 0, 0, 0},
+		{1, 0, 0, 1, 0, 0, 0, 0},
+		{0, 0, 1, 0, 0, 0, 0, 0},
+		{0, 1, 0, 0, 0, 0, 0, 0},
+		{1, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0}
+};
 
 /* USER CODE END PV */
 
